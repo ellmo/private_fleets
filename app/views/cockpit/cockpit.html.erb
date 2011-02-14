@@ -1,0 +1,5 @@
+<div id="mapcanvas" style="background: none repeat scroll 0 0 black; height: 640px; width: 640px;"></div>
+<%= button_to_remote "rysuj planetę", :url => {:action => "draw_planet"} %>
+
+<%= javascript_tag "jg = new jsGraphics('mapcanvas');" %>
+
