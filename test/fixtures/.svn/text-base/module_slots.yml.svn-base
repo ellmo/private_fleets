@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  ship_model_id: 
+  module_type_id: 
+  grid_x: 
+  grid_y: 
+
+two:
+  ship_model_id: 
+  module_type_id: 
+  grid_x: 
+  grid_y: 

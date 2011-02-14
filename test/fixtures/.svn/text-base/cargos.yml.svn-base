@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  cargo_type_id: 
+  name: MyString
+
+two:
+  cargo_type_id: 
+  name: MyString

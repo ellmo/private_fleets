@@ -1,0 +1,77 @@
+10
+
+dir
+3
+file:///home/ellmo/SVN/prifleet/prifleets/test
+file:///home/ellmo/SVN/prifleet
+
+
+
+2010-10-11T22:15:23.493075Z
+3
+ellmo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+adffd60f-fbfd-443b-bc97-dd7e35e84401
+
+unit
+dir
+
+test_helper.rb
+file
+
+
+
+
+2010-10-11T22:20:03.000000Z
+e297614c72684d065aef001f86188732
+2010-10-09T16:12:07.557941Z
+2
+ellmo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1800
+
+performance
+dir
+
+functional
+dir
+
+integration
+dir
+
+fixtures
+dir
+
