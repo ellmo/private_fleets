@@ -1,0 +1,2 @@
+module StarmapHelper
+end
