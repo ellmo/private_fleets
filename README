@@ -12,11 +12,11 @@ A personal project aiming to become a browser-based space trading game.
   These are goals to steer the future work in a specific direction. They are here to make my job simpler, but they are not by any means final. They might change as the work progresses and probably will.
 
   [1.1] Technical goals:
-    - The browser side of the application should rely only on Ruby on Rails and Ajax technologies; this means I refuse to use Flash / Flex technologies to produce graphics. Instead javascript libraries like "wz_jsgraphics" will be used.
+    - The browser side of the application should rely only on Ruby on Rails and Ajax technologies; this means I refuse to use Flash / Flex technologies to produce graphics. Instead javascript libraries like "Raphaël.js" will be used.
     - Login/Password based authentication of users
     - Data stored in a SQLite3 or mySQL database
 
   [1.2] Gameplay goals:
   - Realistic star systems, with planets independently orbiting the central star and the position of the planets impacting travel path and time, while within the star system.
-  - Simple graphic overlays using background images, sprites and polygon objects (produced through "wz_jsgraphics" library) to create an illusion of actually playing a simple simulator game.
+  - Simple graphic overlays using background images, sprites and polygon objects (produced through "Raphaël.js" library) to create an illusion of actually playing a simple simulator game.
   - Realistic economics simulation on planets and space station; supply and demand as a result of the commodity's availability and price

@@ -9,12 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101012221447) do
+ActiveRecord::Schema.define(:version => 20110215232301) do
 
   create_table "module_sets", :force => true do |t|
     t.integer  "ship_id"
     t.integer  "module_id"
     t.integer  "module_slot_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "module_slots", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
