@@ -7,6 +7,10 @@ module RafaAggregate
     # Creates a Raphael canvas in a given html element
     # and initializes the string registry, keeping all the
     # javascript calls in order.
+    # Arguments are:
+    # * element_id:String - the html id of an element (a div would actually be the only reasonable choice) to start the Raphael canvas in
+    # * width:Fixnum - width of the canvas object, it can be different than the html element's width, but it really shouldn't
+    # * height:Fixnum - height of the canvas object
     def initialize(element_id, width, height)
       (element_id.is_a? String) ?
         @element_id = element_id : raise(ArgumentError, "element_id has to be a String")
@@ -37,26 +41,33 @@ module RafaAggregate
     end
 
     # Adds a javascript function creating a circle with given
-    # parameters through Raphaël.js to the class registry
-    # 
-    def circle(*options)
-      if options.length > 5
-        raise(ArgumentError, "Unable to process more than 5 arguments.")
+    # parameters through Raphael.js to the class registry.
+    # The method accepts 4 or 5 arguments:
+    # * name:String - the name of the object created
+    # * cx:Fixnum - x position of the circle
+    # * cy:Fixnum - y position of the circle
+    # * radius:Fixnum - radius of the circle
+    # * params:Hash - optional collection of SVG attributes (e.g. {"stroke-dasharray" => "-."})
+    def circle(name, cx, cy, radius, params=nil)
+      if( name.is_a? String and cx.is_a? Fixnum and cy.is_a? Fixnum and radius.is_a? Fixnum )
+        @reg.push("var #{name} = raphael.circle(#{cx}, #{cy}, #{radius});")
+        set_attr(name, params) if (params and params.is_a? Hash)
       else
-        if( options[0].is_a? String and options[1].is_a? Fixnum and options[2].is_a? Fixnum and options[2].is_a? Fixnum )
-          circle_id = options[0]
-          circle_x = options[1]
-          circle_y = options[2]
-          circle_r = options[3]
-        else
-          raise(ArgumentError, "\nArgument 0 is a name of the created object and needs to be a String.\nArguments 1, 2, 3 correspond to cricle's X, Y, Radius and need to be Fixnums.")
-        end
-        (options[4] and options[4].is_a? Hash) ?
-          params = options[4].collect {|x| "'#{x[0]}':'#{x[1]}', "} : params = nil
+        raise(ArgumentError, "The arguments are: object's name, center x, center y, radius, SVG parameters")
       end
-      (params) ?
-        _params = "#{circle_id}.attr({#{params.to_s}});" : _params = ""
-      @reg.push("var #{circle_id} = raphael.circle(#{circle_x}, #{circle_y}, #{circle_r}); #{_params}")
+    end
+    
+    # Modifies SVG attributes of a given Raphael object
+    # Arguments are:
+    # * name:String - the name of a Raphael object to be modified
+    # * params:Hash - collection of SVG attributes (e.g. {"stroke-dasharray" => "-."})
+    def set_attr(name, params)
+      if( name.is_a? String and params.is_a? Hash)
+        _params = name + ".attr({" + (params.collect {|x| "'#{x[0]}':'#{x[1]}', "}).to_s + "});"
+        @reg.push _params
+      else
+        raise(ArgumentError, "The arguments are: object's name, SVG parameters")
+      end
     end
 
   end
