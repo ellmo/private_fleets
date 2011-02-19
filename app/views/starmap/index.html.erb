@@ -1,9 +1,3 @@
-<center>
-  <div id='mapcanvas'>
-  </div>
-</center>
-<%= canvas('mapcanvas', 400, 400) do |canvas|
-    params = {'stroke' => '#9f0', 'stroke-width' => 3, 'fill' => '#444'}
-    canvas.circle(50, 50, 20, params)
-  end
-%>
+<div id='mapcanvas'>
+</div>
+<%= link_to_remote "draw star system", :url => {:action => "draw_orbits"} %>

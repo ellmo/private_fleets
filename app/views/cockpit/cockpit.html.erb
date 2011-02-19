@@ -1,5 +1,39 @@
-<div id="mapcanvas" style="background: none repeat scroll 0 0 black; height: 640px; width: 640px;"></div>
-<%= button_to_remote "rysuj planetę", :url => {:action => "draw_planet"} %>
+<div id="placeholder" style="text-align:center; background-color:#333">
+  <div style="font-size:large; font-weight:bold; color:#eee">
+    Rafa example <br />
+    2009 - Ruben Medellin
+  </div>
+</div>
+<%=
+  canvas('placeholder', 600, 600) do |canvas|
 
-<%= javascript_tag "jg = new jsGraphics('mapcanvas');" %>
+    # Fig 1
+    canvas.path(:stroke => '#9f0', :stroke_width => 3, :fill => '#11a800') do
+      move_to(10, 10).line_to(30, 50).wave_to(100, 100, 60)
+      curve_to(200, 10, 200, 30, 250, 50).qcurve_to(150, 150, 200, 200)
+      line_to(30, 80).and_close
+    end
+
+    # Fig 2
+    canvas.path(:stroke => '#09f', :stroke_width => 5) do
+      move_to(300, 25)
+      10.times do |i|
+        wave_to(300, (i + 1) * 40, (i + 1) * 20)
+      end
+    end
+
+
+    # Fig 3
+    canvas.path(:stroke => '#f09', :stroke_width => 6) do
+      move_to(125, 250 + 125)
+      relatively
+      move_to(0, -10)
+      directions = [:rd, :dl, :lu, :ur]
+      0.upto(20) do |i|
+        rounded_corner((i + 1) * 10, directions[i % 4])
+      end
+    end
+
+  end
+%>
 
