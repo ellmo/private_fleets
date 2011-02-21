@@ -3,20 +3,29 @@ class StarmapController < ApplicationController
   include RafaAggregate
 
   def index
+    @canvas_size = 640
+    @system = Starsystem.find 1
+    @planets = @system.planets
+    orbit_params = {:stroke => 'white', 'stroke-dasharray' => "-", 'stroke-opacity' => 0.6}
+
+    @r = Rafagg.new
+    @r.canvas("mapcanvas", @canvas_size, @canvas_size)
+    @planets.each do |planet|
+      @r.circle("#{planet.name}_orbit", @canvas_size/2, @canvas_size/2, planet.orbit_radius, orbit_params)
+      @r.circle("#{planet.name}", 320+planet.x_pos, 320+planet.y_pos, 10, {:fill => planet.planet_type.color})
+    end
   end
 
-  def draw_orbits
-    @canvas_size = 640
-    @number_of_planets = 12
-    @orbit_step = ((@canvas_size-20)/@number_of_planets)/2.to_f
-    orbit_params = {'stroke' => 'white', 'stroke-dasharray' => "-", 'stroke-opacity' => 0.6}
-    sun_params = {'stroke' => 'none', 'fill' => 'yellow'}
-
-    r = Rafagg.new("mapcanvas", @canvas_size, @canvas_size)
-    1.upto(@number_of_planets) do |x|
-      r.circle("planet#{x}", @canvas_size/2, @canvas_size/2, x * @orbit_step, orbit_params)
+  def update_planet_movement
+    @system = Starsystem.find 1
+    @planets = @system.planets
+    
+    r = Rafagg.new
+    @planets.each do |planet|
+      r.set_attr(planet.name, {:cx => 320+planet.x_pos, :cy => 320+planet.y_pos})
     end
 
     render :js => r.call
   end
+
 end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110215232301) do
+ActiveRecord::Schema.define(:version => 20110220133829) do
 
   create_table "module_sets", :force => true do |t|
     t.integer  "ship_id"
@@ -36,6 +36,23 @@ ActiveRecord::Schema.define(:version => 20110215232301) do
     t.string   "name"
     t.integer  "power_usage"
     t.integer  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "planet_types", :force => true do |t|
+    t.string   "name"
+    t.string   "color"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "planets", :force => true do |t|
+    t.string   "name"
+    t.integer  "starsystem_id"
+    t.integer  "planet_type_id"
+    t.integer  "orbit_radius"
+    t.integer  "period"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -73,6 +90,12 @@ ActiveRecord::Schema.define(:version => 20110215232301) do
   create_table "ships", :force => true do |t|
     t.integer  "ship_model_id"
     t.integer  "fleet_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "starsystems", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

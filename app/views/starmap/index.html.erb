@@ -1,3 +1,6 @@
 <div id='mapcanvas'>
 </div>
-<%= link_to_remote "draw star system", :url => {:action => "draw_orbits"} %>
+<script type="text/javascript">
+  <%= @r.call %>
+</script>
+<%= periodically_call_remote :url => {:action => "update_planet_movement"}, :frequency => 5 %>
