@@ -75,6 +75,49 @@ module RafaAggregate
       end
     end
 
+    # Adds a javascript function creating a rectangle with given
+    # parameters through Raphael.js to the class registry.
+    # The method accepts 6 or 7 arguments:
+    # * name:String - the name of the object created
+    # * cx:Numeric - x position of the top-left corner
+    # * cy:Numeric - y position of the top-left corner
+    # * width:Numeric - width of the rectangle
+    # * height:Numeric - height of the rectangle
+    # * rounding:Numeric - rounded corner radius
+    # * params:Hash - optional collection of SVG attributes (e.g. {"stroke-dasharray" => "-."})
+    def rect(name, cx, cy, width, height, rounding=0,params=nil)
+      if( name.is_a? String and cx.is_a? Numeric and cy.is_a? Numeric and width.is_a? Numeric and height.is_a? Numeric and rounding.is_a? Numeric)
+        @reg.push("var #{name} = raphael.rect(#{cx}, #{cy}, #{width}, #{height}, #{rounding});")
+        set_attr(name, params) if (params and params.is_a? Hash)
+      else
+        raise(ArgumentError, "
+            The arguments are: object`s name, top-left corner x, top-left corner y,\n
+            width, height, rounding (default 0), SVG parameters
+          ")
+      end
+    end
+
+    # Adds a javascript function creating an ellipse with given
+    # parameters through Raphael.js to the class registry.
+    # The method accepts 5 or 6 arguments:
+    # * name:String - the name of the object created
+    # * cx:Numeric - x position of the circle
+    # * cy:Numeric - y position of the circle
+    # * hradius:Numeric - horizontal radius of the ellipse
+    # * vradius:Numeric - vertical radius of the ellipse
+    # * params:Hash - optional collection of SVG attributes (e.g. {"stroke-dasharray" => "-."})
+    def ellipse(name, cx, cy, hradius, vradius, params=nil)
+      if( name.is_a? String and cx.is_a? Numeric and cy.is_a? Numeric and hradius.is_a? Numeric and vradius.is_a? Numeric )
+        @reg.push("var #{name} = raphael.ellipse(#{cx}, #{cy}, #{hradius}, #{vradius});")
+        set_attr(name, params) if (params and params.is_a? Hash)
+      else
+        raise(ArgumentError, "
+            The arguments are: object`s name, center x, center y, horizontal radius, vertical radius,\n
+            SVG parameters
+          ")
+      end
+    end
+
   end
 
 end

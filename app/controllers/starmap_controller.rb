@@ -14,6 +14,8 @@ class StarmapController < ApplicationController
       @r.circle("#{planet.name}_orbit", @canvas_size/2, @canvas_size/2, planet.orbit_radius, orbit_params)
       @r.circle("#{planet.name}", 320+planet.x_pos, 320+planet.y_pos, 10, {:fill => planet.planet_type.color})
     end
+    #@r.rect("ddd", 300, 300, 40, 40, 5, orbit_params)
+    #@r.ellipse("eee", 320, 320, 80, 120, orbit_params)
   end
 
   def update_planet_movement
